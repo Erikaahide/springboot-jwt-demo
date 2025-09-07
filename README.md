@@ -55,7 +55,7 @@ The project includes:
 
 Before running this project, make sure you have the following installed:
 
-- **Java 21** (JDK) → [Download here](https://adoptium.net/)  
+- **Java 21** (JDK) 
 - **Maven 3.9+** or **Gradle 8+** (project can run with either)  
 - **MySQL 8.0+** (or another relational database, update `application.properties` accordingly)  
 - **Git** for version control  
@@ -72,43 +72,43 @@ Optional (for easier development):
 ## API Endpoints
 
 **Register User**
-POST http://localhost:8080/auth/register
-Content-Type: application/json
-Response:
+- POST http://localhost:8080/auth/register   
+Content-Type: application/json   
+ Response:   
 { "token": "..." }
 
 **Login**
-POST http://localhost:8080/auth/login
-Content-Type: application/json
-{
-  "email": " ",
-  "password": " "
-}
+- POST http://localhost:8080/auth/login 
+Content-Type: application/json  
+{  
+  "email": " ",  
+  "password": " "  
+}  
 Response includes a JWT token.
 
 **Create Post (Authenticated)**
-POST http://localhost:8080/api/posts
-Authorization: Bearer <token>
-Content-Type: application/json
-{
-  "content": "New post"
+- POST http://localhost:8080/api/posts
+Authorization: Bearer <token>  
+Content-Type: application/json  
+{  
+  "content": "New post"  
 }
 
 **List Posts (READ)**
-GET http://localhost:8080/api/posts?page=0&size=5
-Authorization: Bearer <token>
+- GET http://localhost:8080/api/posts?page=0&size=5   
+Authorization: Bearer <token>  
 
 **Update Post**
-PUT http://localhost:8080/api/posts/{id}
-Authorization: Bearer <token>
-Content-Type: application/json
-{
-  "content": "Edit"
-}
-Only the author of the post can update it.
+- PUT http://localhost:8080/api/posts/{id}  
+Authorization: Bearer <token>  
+Content-Type: application/json  
+{  
+  "content": "Edit"  
+}  
+Only the author of the post can update it.  
 
 **Delete Post**
-DELETE http://localhost:8080/api/posts/{id}
-Authorization: Bearer <token>
-If successful → 204 No Content
-Only the author of the post can delete it.
+- DELETE http://localhost:8080/api/posts/{id}  
+Authorization: Bearer <token>  
+If successful → 204 No Content  
+Only the author of the post can delete it.  
