@@ -21,20 +21,29 @@ The goal is to demonstrate knowledge of backend development, database integratio
 
 ## 📂 Project Structure
 ```bash
-src/main/java/com/example/demo
+src/main/java
  ├─ config/       # Beans (PasswordEncoder, SecurityConfig)
  ├─ controller/   # REST Controllers
  ├─ dto/          # Data Transfer Objects
  ├─ model/        # JPA Entities
  ├─ repository/   # JpaRepository Interfaces
  ├─ service/      # Business Logic
- └─ security/     # JWT Filters & Utilities
+ ├─ security/     # JWT Filters & Utilities
+ └─ DemoEaApplication.java  # Main class
  ```
 
+This is a demo Spring application for a simple fitness social network where users can register, log in, and create posts.
+
+The project includes:
+- schema.sql → Database schema (executed on startup).
+- data.sql → Initial test data.
+- Local insertion → You can also insert data manually via Postman or SQL client.
+- DDL auto → spring.jpa.hibernate.ddl-auto=update (tables are updated automatically).
+
 ## 🧪 Main Endpoints
-POST /auth/login → Authenticate and return a JWT
-POST /auth/register → Register a new user
-GET /api/users → Get all users (requires token)
+- POST /auth/login → Authenticate and return a JWT
+- POST /auth/register → Register a new user
+- GET /api/users → Get all users (requires token)
 
 ## How to Clone and Run
 
@@ -55,3 +64,51 @@ Optional (for easier development):
 - **IntelliJ IDEA** or **VS Code** with Spring Boot extensions
 - **Postman / cURL** for testing API endpoints
 - **Docker** (if you want to run the database in a container)
+
+- Create the database in MySQL CREATE DATABASE fitnet;
+- You can load default test data via data.sql.
+- If you prefer to test manually, use Postman with the examples above.
+
+## API Endpoints
+
+**Register User**
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+Response:
+{ "token": "..." }
+
+**Login**
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+{
+  "email": " ",
+  "password": " "
+}
+Response includes a JWT token.
+
+**Create Post (Authenticated)**
+POST http://localhost:8080/api/posts
+Authorization: Bearer <token>
+Content-Type: application/json
+{
+  "content": "New post"
+}
+
+**List Posts (READ)**
+GET http://localhost:8080/api/posts?page=0&size=5
+Authorization: Bearer <token>
+
+**Update Post**
+PUT http://localhost:8080/api/posts/{id}
+Authorization: Bearer <token>
+Content-Type: application/json
+{
+  "content": "Edit"
+}
+Only the author of the post can update it.
+
+**Delete Post**
+DELETE http://localhost:8080/api/posts/{id}
+Authorization: Bearer <token>
+If successful → 204 No Content
+Only the author of the post can delete it.
