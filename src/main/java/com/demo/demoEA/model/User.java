@@ -2,6 +2,8 @@ package com.demo.demoEA.model;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +19,7 @@ public class User {
 @Id @GeneratedValue(strategy=GenerationType.IDENTITY) private Long id;
 @Column(nullable=false, length=80) private String name;
 @Column(nullable = false, unique = true, length = 120) private String email;
-@Column(nullable=false, length=255) private String password; // BCrypt
+@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) @Column(nullable=false, length=255) private String password; // BCrypt
 @CreationTimestamp private Timestamp createdAt;
 
 //empty constructor for method POST

@@ -32,7 +32,7 @@ public class JwtUtil {
       .setSubject(username)
       .setIssuedAt(now)
       .setExpiration(exp)
-      .signWith(Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8)), SignatureAlgorithm.HS256)
+      .signWith(getSigningKey(), SignatureAlgorithm.HS256)
       .compact();
   }
 
